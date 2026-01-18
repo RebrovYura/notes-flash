@@ -9,13 +9,13 @@ public class Document {
     private int currentPageIndex = 0;
     private String name;
 
-    public Document() {
+    public Document(String name) {
         pages.add(new Page());
         this.name = name;
     }
 
-    public int getCurrentPage() {
-        return this.currentPageIndex;
+    public Page getCurrentPage() {
+        return pages.get(currentPageIndex);
     }
 
     public List<Page> getPages() {
