@@ -5,6 +5,9 @@ import com.rebrovdev.notesflash.model.Stroke;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+import java.util.List;
+
 public class StrokeRenderer {
 
     public void render(GraphicsContext gc, Stroke stroke) {

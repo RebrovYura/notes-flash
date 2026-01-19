@@ -16,7 +16,6 @@ public class PenTool implements Tool {
         this.width = width;
         this.onStrokeFinished = onStrokeFinished;
         this.currentStroke = null;
-        // System.out.println(onStrokeFinished == null);
     }
 
     @Override
@@ -34,12 +33,24 @@ public class PenTool implements Tool {
 
     @Override
     public void onRelease(double x, double y) {
-        System.out.println("pentool onRelease");
         if (currentStroke != null) {
             currentStroke.addPoint(x, y);
-            System.out.println("Stroke finished, points = " + currentStroke.getPoints().size());
             onStrokeFinished.accept(currentStroke);
-            currentStroke = null;
+//            currentStroke = null;
         }
+    }
+
+    public boolean hasPreview() {
+        return currentStroke != null;
+    }
+
+    public Stroke getPreview() {
+        return currentStroke;
+    }
+
+    public Stroke finishStroke() {
+        Stroke finish = currentStroke;
+        currentStroke = null;
+        return finish;
     }
 }

@@ -12,16 +12,12 @@ public class CanvasViewModel {
 
     private final Document document;
     private final ObjectProperty<Page> currentPage;
-    // private final ObjectProperty<Page> currentPage = new
-    // SimpleObjectProperty<>(document.getCurrentPage());
     private final ObjectProperty<Tool> activeTool;
-    // private final ObjectProperty<Tool> activeTool = new SimpleObjectProperty<>();
 
-    private void addStroke(Stroke stroke) {
+    public void addStroke(Stroke stroke) {
         currentPage.get().getStrokes().add(stroke);
         currentPage.set(currentPage.get());
         System.out.println("addstroke");
-        // System.out.println(stroke.getColor() + " " + stroke.getWidth());
     }
 
     public CanvasViewModel() {
@@ -29,27 +25,21 @@ public class CanvasViewModel {
         this.currentPage = new SimpleObjectProperty<>(document.getCurrentPage());
         this.activeTool = new SimpleObjectProperty<>();
         this.activeTool.set(new PenTool(0x000000, 2.0, this::addStroke));
-        // activeTool.set(new PenTool(0x000000, 20.0, this::addStroke));
-        // System.out.println("Hello from CVM constructor");
     }
 
     public void onMousePresses(double x, double y) {
         activeTool.get().onPress(x, y);
         System.out.println("pressed");
-        // System.out.println("active tool: " + activeTool.get());
-        // System.out.println("x: " + x + "\n" + "y: " + y);
     }
 
     public void onMouseDragged(double x, double y) {
         activeTool.get().onDrag(x, y);
         System.out.println("dragged");
-        // System.out.println("x: " + x + "\n" + "y: " + y);
     }
 
     public void onMouseReleased(double x, double y) {
         activeTool.get().onRelease(x, y);
         System.out.println("released");
-        // System.out.println("x: " + x + "\n" + "y: " + y);
     }
 
     public ObjectProperty<Page> currentPageProperty() {
@@ -64,8 +54,6 @@ public class CanvasViewModel {
         return activeTool.get();
     }
 
-    public Page getCurrentPage() {
-        return currentPage.get();
-    }
+    public Page getCurrentPage() { return currentPage.get(); }
 
 }

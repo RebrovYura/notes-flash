@@ -20,7 +20,7 @@ public class Stroke {
         System.out.println("point has been added");
     }
 
-    public List<Point> getPoints() {
+    public List<Point> getPoints(){
         return points;
     }
 
