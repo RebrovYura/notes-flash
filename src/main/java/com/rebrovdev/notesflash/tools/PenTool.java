@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 
 public class PenTool implements Tool {
 
-    private Stroke currentStroke;
     private final Consumer<Stroke> onStrokeFinished;
+    private Stroke currentStroke;
     private int color;
     private double width;
 
@@ -16,6 +16,7 @@ public class PenTool implements Tool {
         this.width = width;
         this.onStrokeFinished = onStrokeFinished;
         this.currentStroke = null;
+        // System.out.println(onStrokeFinished == null);
     }
 
     @Override
@@ -33,8 +34,10 @@ public class PenTool implements Tool {
 
     @Override
     public void onRelease(double x, double y) {
-        if (currentStroke == null) {
+        System.out.println("pentool onRelease");
+        if (currentStroke != null) {
             currentStroke.addPoint(x, y);
+            System.out.println("Stroke finished, points = " + currentStroke.getPoints().size());
             onStrokeFinished.accept(currentStroke);
             currentStroke = null;
         }

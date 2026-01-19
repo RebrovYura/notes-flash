@@ -17,6 +17,7 @@ public class Stroke {
 
     public void addPoint(double x, double y) {
         points.add(new Point(x, y));
+        System.out.println("point has been added");
     }
 
     public List<Point> getPoints() {
@@ -24,11 +25,11 @@ public class Stroke {
     }
 
     public int getColor() {
-        return this.color;
+        return color;
     }
 
     public double getWidth() {
-        return this.width;
+        return width;
     }
 
 }
