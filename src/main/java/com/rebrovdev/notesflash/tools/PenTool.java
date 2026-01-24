@@ -19,6 +19,8 @@ public class PenTool implements Tool {
 
     @Override
     public void onRelease(GraphicsContext gc, double x, double y) {
+        gc.lineTo(x, y);
+        gc.stroke();
         gc.closePath();
     }
 }
