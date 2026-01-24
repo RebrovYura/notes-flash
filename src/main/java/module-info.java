@@ -6,4 +6,6 @@ module com.rebrovdev.notesflash {
 
     opens com.rebrovdev.notesflash to javafx.fxml;
     exports com.rebrovdev.notesflash;
+    exports com.rebrovdev.notesflash.controller;
+    opens com.rebrovdev.notesflash.controller to javafx.fxml;
 }

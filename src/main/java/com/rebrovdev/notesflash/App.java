@@ -3,20 +3,23 @@ package com.rebrovdev.notesflash;
 import com.rebrovdev.notesflash.ui.CanvasView;
 import com.rebrovdev.notesflash.viewmodel.CanvasViewModel;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class App extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
     @Override
-    public void start(Stage stage) {
-        CanvasViewModel vm = new CanvasViewModel();
-        CanvasView view = new CanvasView(vm);
-        Scene scene = new Scene(view, 1000, 700);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/notesFlash-ui.fxml"));
+        Scene scene = new Scene(loader.load(), 1000, 700);
+        scene.getStylesheets().add(getClass().getResource("/style/style.css").toString());
 
         stage.setTitle("NotesFlash");
         stage.setScene(scene);

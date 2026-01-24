@@ -1,0 +1,13 @@
+.root {
+}
+
+.tool-panel {
+  -fx-padding: 10;
+  -fx-background-color: #f2f2f2;
+  -fx-pref-width: 140;
+}
+
+.button {
+  -fx-font-size: 14px;
+  -fx-pref-width: 120;
+}

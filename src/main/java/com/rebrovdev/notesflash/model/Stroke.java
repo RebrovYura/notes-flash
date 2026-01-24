@@ -7,8 +7,9 @@ public class Stroke {
 
     // Путь из точек для отрисовки линии
     private final List<Point> points = new ArrayList<>();
-    private final int color;
-    private final double width;
+    private int color;
+    private double width;
+    private double opacity;
 
     public Stroke(int color, double width) {
         this.color = color;
@@ -17,7 +18,7 @@ public class Stroke {
 
     public void addPoint(double x, double y) {
         points.add(new Point(x, y));
-        System.out.println("point has been added");
+        System.out.println("point has been added at x: " + x + " y: " + y);
     }
 
     public List<Point> getPoints(){
@@ -31,5 +32,13 @@ public class Stroke {
     public double getWidth() {
         return width;
     }
+
+//    public double getOpacity() {
+//        return opacity;
+//    }
+
+//    public void setOpacity(double opacity) {
+//        this.opacity = opacity;
+//    }
 
 }
