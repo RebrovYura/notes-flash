@@ -41,8 +41,8 @@ public class AppController {
         drawingCanvas.widthProperty().bind(canvasContainer.widthProperty());
         drawingCanvas.heightProperty().bind(canvasContainer.heightProperty());
 
-        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.LINES));
-        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.LINES));
+        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.GRID));
+        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.GRID));
 
         selectPen();
 
@@ -72,7 +72,7 @@ public class AppController {
     private void selectEraser() {
         // TODO: Delete points, not "repaint" with white color
         gc.setStroke(Color.WHITE);
-        gc.setLineWidth(5);
+        gc.setLineWidth(20);
         currentTool = eraserTool;
     }
 
@@ -95,6 +95,23 @@ public class AppController {
         }
     }
 
+    private void gridPage() {
+        GraphicsContext gc = backgroundCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
+
+        gc.setStroke(Color.LIGHTGRAY);
+        gc.setLineWidth(1);
+
+        double spacing = 35;
+
+        for (double i = 0; i < backgroundCanvas.getWidth(); i += spacing) {
+            gc.strokeLine(0, i, backgroundCanvas.getWidth(), i);
+        }
+        for (double j = 0; j < backgroundCanvas.getWidth(); j += spacing) {
+            gc.strokeLine(j, 0, j, backgroundCanvas.getHeight());
+        }
+    }
+
     public void drawPage(PageBackgroundType pageType) {
         GraphicsContext gc = backgroundCanvas.getGraphicsContext2D();
         double w = backgroundCanvas.getWidth();
@@ -104,7 +121,7 @@ public class AppController {
 
         switch (pageType) {
 //            case DOTS -> dotsPage();
-//            case GRID -> gridPage();
+            case GRID -> gridPage();
             case LINES -> linesPage();
             default -> {}
         }
