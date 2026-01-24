@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.StackPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.rebrovdev.notesflash.controller.AppController">
     <left>
@@ -18,7 +19,10 @@
     </left>
 
     <center>
-        <Canvas fx:id="canvas" height="600" width="900"/>
+        <StackPane fx:id="canvasContainer" BorderPane.alignment="CENTER">
+            <Canvas fx:id="backgroundCanvas"/>
+            <Canvas fx:id="drawingCanvas"/>
+        </StackPane>
     </center>
 
 </BorderPane>

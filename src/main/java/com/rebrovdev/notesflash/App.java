@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/notesFlash-ui.fxml"));
-        Scene scene = new Scene(loader.load(), 1000, 700);
+        Scene scene = new Scene(loader.load(), 1280, 720);
         scene.getStylesheets().add(getClass().getResource("/style/style.css").toString());
 
         stage.setTitle("NotesFlash");

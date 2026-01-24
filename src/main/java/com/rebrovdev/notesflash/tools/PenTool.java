@@ -1,10 +1,6 @@
 package com.rebrovdev.notesflash.tools;
 
-import com.rebrovdev.notesflash.model.Point;
-import com.rebrovdev.notesflash.model.Stroke;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.util.function.Consumer;
 
 public class PenTool implements Tool {
 

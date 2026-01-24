@@ -6,7 +6,7 @@ import java.util.List;
 public class Page {
 
     private final List<Stroke> strokes = new ArrayList<>();
-    private PageBackgroundType background = PageBackgroundType.PLAIN;
+    private PageBackgroundType background = PageBackgroundType.BLANK;
 
     public List<Stroke> getStrokes() {
         return strokes;

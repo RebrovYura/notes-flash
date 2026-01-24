@@ -1,8 +1,8 @@
 package com.rebrovdev.notesflash.model;
 
 public enum PageBackgroundType {
-    DOTTED,
-    PLAIN,
+    DOTS,
+    BLANK,
     GRID,
-    LINED
+    LINES
 }
