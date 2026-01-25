@@ -1,13 +1,6 @@
 package com.rebrovdev.notesflash.tools;
 
-import com.rebrovdev.notesflash.model.Document;
-import com.rebrovdev.notesflash.model.Page;
-import com.rebrovdev.notesflash.model.Point;
-import com.rebrovdev.notesflash.model.Stroke;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class EraserTool implements Tool{
 

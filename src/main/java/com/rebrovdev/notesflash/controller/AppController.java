@@ -41,8 +41,8 @@ public class AppController {
         drawingCanvas.widthProperty().bind(canvasContainer.widthProperty());
         drawingCanvas.heightProperty().bind(canvasContainer.heightProperty());
 
-        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.GRID));
-        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.GRID));
+        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
+        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
 
         selectPen();
 
@@ -112,6 +112,23 @@ public class AppController {
         }
     }
 
+    private void dotsPage() {
+        GraphicsContext gc = backgroundCanvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, backgroundCanvas.getWidth(), backgroundCanvas.getHeight());
+
+        gc.setFill(Color.LIGHTGRAY);
+
+        double spacing = 35;
+        double dotRadius = 1.5;
+
+        for (double i = 1.5; i < backgroundCanvas.getWidth(); i += spacing) {
+            for (double j = 1.5; j < backgroundCanvas.getHeight(); j += spacing) {
+                gc.fillOval(i - dotRadius, j - dotRadius, dotRadius * 2, dotRadius * 2);
+            }
+
+        }
+    }
+
     public void drawPage(PageBackgroundType pageType) {
         GraphicsContext gc = backgroundCanvas.getGraphicsContext2D();
         double w = backgroundCanvas.getWidth();
@@ -120,7 +137,7 @@ public class AppController {
         gc.clearRect(0, 0, w, h);
 
         switch (pageType) {
-//            case DOTS -> dotsPage();
+            case DOTS -> dotsPage();
             case GRID -> gridPage();
             case LINES -> linesPage();
             default -> {}
