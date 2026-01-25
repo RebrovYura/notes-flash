@@ -7,10 +7,14 @@ import com.rebrovdev.notesflash.tools.Tool;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
+
+import java.util.Optional;
 
 public class AppController {
 
@@ -44,7 +48,7 @@ public class AppController {
         canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
         canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
 
-        selectPen();
+//        selectPen();
 
         drawingCanvas.setOnMousePressed(e -> {
             currentTool.onPress(gc, e.getX(), e.getY());
@@ -78,7 +82,16 @@ public class AppController {
 
     @FXML
     private void clearCanvas() {
-        gc.clearRect(0, 0, drawingCanvas.getWidth(), drawingCanvas.getHeight());
+        Alert alertWindow = new Alert(Alert.AlertType.CONFIRMATION);
+        alertWindow.setTitle("Внимание!");
+        alertWindow.setHeaderText("Очистить холст?");
+        alertWindow.setContentText("Все несохраненные изменения будут удалены.");
+
+        Optional<ButtonType> result = alertWindow.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            gc.clearRect(0, 0, drawingCanvas.getWidth(), drawingCanvas.getHeight());
+        }
     }
 
     private void linesPage() {
@@ -125,7 +138,6 @@ public class AppController {
             for (double j = 1.5; j < backgroundCanvas.getHeight(); j += spacing) {
                 gc.fillOval(i - dotRadius, j - dotRadius, dotRadius * 2, dotRadius * 2);
             }
-
         }
     }
 
@@ -142,8 +154,6 @@ public class AppController {
             case LINES -> linesPage();
             default -> {}
         }
-
     }
-
 
 }
