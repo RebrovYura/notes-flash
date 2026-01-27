@@ -4,6 +4,7 @@ import com.rebrovdev.notesflash.model.PageBackgroundType;
 import com.rebrovdev.notesflash.tools.EraserTool;
 import com.rebrovdev.notesflash.tools.PenTool;
 import com.rebrovdev.notesflash.tools.Tool;
+import com.rebrovdev.notesflash.utils.Smoothing;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,10 +18,8 @@ import javafx.scene.shape.StrokeLineJoin;
 import java.util.Optional;
 
 public class AppController {
-
-    private final Tool penTool = new PenTool();
-    private final Tool eraserTool = new EraserTool();
-    private Tool currentTool = penTool;
+    @FXML
+    private StackPane canvasContainer;
 
     @FXML
     private Canvas drawingCanvas;
@@ -28,16 +27,21 @@ public class AppController {
     @FXML
     private Canvas backgroundCanvas;
 
-    @FXML
-    private StackPane canvasContainer;
-
     private GraphicsContext gc;
+    private Smoothing smoothing;
+
+//    private final Tool penTool = new PenTool(gc);
+    private final Tool eraserTool = new EraserTool();
+
+//    private Tool currentTool = penTool;
+
 
     @FXML
     public void initialize() {
         gc = drawingCanvas.getGraphicsContext2D();
         gc.setLineCap(StrokeLineCap.ROUND);
         gc.setLineJoin(StrokeLineJoin.ROUND);
+        Tool penTool = new PenTool(drawingCanvas.getGraphicsContext2D(), smoothing);
 
         backgroundCanvas.widthProperty().bind(canvasContainer.widthProperty());
         backgroundCanvas.heightProperty().bind(canvasContainer.heightProperty());
@@ -51,17 +55,17 @@ public class AppController {
 //        selectPen();
 
         drawingCanvas.setOnMousePressed(e -> {
-            currentTool.onPress(gc, e.getX(), e.getY());
-            System.out.println(currentTool);
+            penTool.onPress(e.getX(), e.getY());
+            System.out.println(penTool);
             System.out.println("Controller onPress: " + e.getX() + "   " + e.getY());
         });
 
         drawingCanvas.setOnMouseDragged(e -> {
-            currentTool.onDrag(gc, e.getX(), e.getY());
+            penTool.onDrag(e.getX(), e.getY());
         });
 
         drawingCanvas.setOnMouseReleased(e -> {
-            currentTool.onRelease(gc, e.getX(), e.getY());
+            penTool.onRelease(e.getX(), e.getY());
         });
     }
 
@@ -69,7 +73,7 @@ public class AppController {
     private void selectPen() {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
-        currentTool = penTool;
+//        currentTool = penTool;
     }
 
     @FXML
@@ -77,7 +81,7 @@ public class AppController {
         // TODO: Delete points, not "repaint" with white color
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(20);
-        currentTool = eraserTool;
+//        currentTool = eraserTool;
     }
 
     @FXML

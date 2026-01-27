@@ -3,24 +3,38 @@ package com.rebrovdev.notesflash.tools;
 import javafx.scene.canvas.GraphicsContext;
 
 public class EraserTool implements Tool{
-
     @Override
-    public void onPress(GraphicsContext gc, double x, double y) {
-        gc.beginPath();
-        gc.moveTo(x, y);
-        gc.stroke();
+    public void onPress(double x, double y) {
+
     }
 
     @Override
-    public void onDrag(GraphicsContext gc, double x, double y) {
-        gc.lineTo(x, y);
-        gc.stroke();
+    public void onDrag(double x, double y) {
+
     }
 
     @Override
-    public void onRelease(GraphicsContext gc, double x, double y) {
-        gc.closePath();
+    public void onRelease(double x, double y) {
+
     }
+
+//    @Override
+//    public void onPress(double x, double y) {
+//        gc.beginPath();
+//        gc.moveTo(x, y);
+//        gc.stroke();
+//    }
+//
+//    @Override
+//    public void onDrag(double x, double y) {
+//        gc.lineTo(x, y);
+//        gc.stroke();
+//    }
+//
+//    @Override
+//    public void onRelease(double x, double y) {
+//        gc.closePath();
+//    }
 
 //    private void eraseAt(double x, double y) {
 //        Page page = document.getCurrentPage();
