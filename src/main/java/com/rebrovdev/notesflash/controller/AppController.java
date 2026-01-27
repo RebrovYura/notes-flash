@@ -12,8 +12,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineCap;
-import javafx.scene.shape.StrokeLineJoin;
 
 import java.util.Optional;
 
@@ -28,20 +26,18 @@ public class AppController {
     private Canvas backgroundCanvas;
 
     private GraphicsContext gc;
-    private Smoothing smoothing;
+//    gc = drawingCanvas.getGraphicsContext2D();
 
-//    private final Tool penTool = new PenTool(gc);
+//    private final Tool penTool = new PenTool(gc, new Smoothing());
     private final Tool eraserTool = new EraserTool();
 
-//    private Tool currentTool = penTool;
+    private Tool currentTool;
 
 
     @FXML
     public void initialize() {
         gc = drawingCanvas.getGraphicsContext2D();
-        gc.setLineCap(StrokeLineCap.ROUND);
-        gc.setLineJoin(StrokeLineJoin.ROUND);
-        Tool penTool = new PenTool(drawingCanvas.getGraphicsContext2D(), smoothing);
+        Tool penTool = new PenTool(gc, new Smoothing());
 
         backgroundCanvas.widthProperty().bind(canvasContainer.widthProperty());
         backgroundCanvas.heightProperty().bind(canvasContainer.heightProperty());
@@ -52,12 +48,8 @@ public class AppController {
         canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
         canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
 
-//        selectPen();
-
         drawingCanvas.setOnMousePressed(e -> {
             penTool.onPress(e.getX(), e.getY());
-            System.out.println(penTool);
-            System.out.println("Controller onPress: " + e.getX() + "   " + e.getY());
         });
 
         drawingCanvas.setOnMouseDragged(e -> {
@@ -73,7 +65,7 @@ public class AppController {
     private void selectPen() {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
-//        currentTool = penTool;
+        currentTool = new PenTool(gc, new Smoothing());
     }
 
     @FXML

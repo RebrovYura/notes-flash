@@ -43,6 +43,7 @@ public class PenTool implements Tool {
 
     @Override
     public void onRelease(double x, double y) {
+//        points.add(new Point(x, y));
         points.clear();
     }
 }
