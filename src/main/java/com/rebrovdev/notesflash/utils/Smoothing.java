@@ -1,6 +1,6 @@
 package com.rebrovdev.notesflash.utils;
 
-import com.rebrovdev.notesflash.model.Point;
+import com.rebrovdev.notesflash.model.canvas.Point;
 import javafx.scene.canvas.GraphicsContext;
 import java.util.List;
 

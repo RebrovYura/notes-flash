@@ -1,4 +1,4 @@
-package com.rebrovdev.notesflash.model;
+package com.rebrovdev.notesflash.model.canvas;
 
 import java.util.ArrayList;
 import java.util.List;

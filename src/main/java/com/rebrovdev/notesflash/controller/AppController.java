@@ -1,9 +1,10 @@
 package com.rebrovdev.notesflash.controller;
 
 import com.rebrovdev.notesflash.model.PageBackgroundType;
-import com.rebrovdev.notesflash.tools.EraserTool;
-import com.rebrovdev.notesflash.tools.PenTool;
-import com.rebrovdev.notesflash.tools.Tool;
+import com.rebrovdev.notesflash.model.tool.EraserTool;
+import com.rebrovdev.notesflash.model.tool.PenTool;
+import com.rebrovdev.notesflash.model.tool.Tool;
+import com.rebrovdev.notesflash.model.tool.ToolFactory;
 import com.rebrovdev.notesflash.utils.Smoothing;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -30,42 +31,51 @@ public class AppController {
 
 //    private final Tool penTool = new PenTool(gc, new Smoothing());
     private final Tool eraserTool = new EraserTool();
+//    private final Tool penTool = ToolFactory.createPen(drawingCanvas);
 
     private Tool currentTool;
+
+    private PageBackgroundType currentGrid = PageBackgroundType.LINES;
 
 
     @FXML
     public void initialize() {
         gc = drawingCanvas.getGraphicsContext2D();
-        Tool penTool = new PenTool(gc, new Smoothing());
+        currentTool = ToolFactory.createPen(drawingCanvas);
+        bgSettings(currentGrid);
+        onMouseActions();
+    }
 
+    private void onMouseActions() {
+        drawingCanvas.setOnMousePressed(e -> {
+            currentTool.onPress(e.getX(), e.getY());
+        });
+
+        drawingCanvas.setOnMouseDragged(e -> {
+            currentTool.onDrag(e.getX(), e.getY());
+        });
+
+        drawingCanvas.setOnMouseReleased(e -> {
+            currentTool.onRelease(e.getX(), e.getY());
+        });
+    }
+
+    private void bgSettings(PageBackgroundType currentGrid) {
         backgroundCanvas.widthProperty().bind(canvasContainer.widthProperty());
         backgroundCanvas.heightProperty().bind(canvasContainer.heightProperty());
 
         drawingCanvas.widthProperty().bind(canvasContainer.widthProperty());
         drawingCanvas.heightProperty().bind(canvasContainer.heightProperty());
 
-        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
-        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(PageBackgroundType.DOTS));
-
-        drawingCanvas.setOnMousePressed(e -> {
-            penTool.onPress(e.getX(), e.getY());
-        });
-
-        drawingCanvas.setOnMouseDragged(e -> {
-            penTool.onDrag(e.getX(), e.getY());
-        });
-
-        drawingCanvas.setOnMouseReleased(e -> {
-            penTool.onRelease(e.getX(), e.getY());
-        });
+        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(currentGrid));
+        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(currentGrid));
     }
 
     @FXML
     private void selectPen() {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
-        currentTool = new PenTool(gc, new Smoothing());
+        currentTool = ToolFactory.createPen(drawingCanvas);
     }
 
     @FXML
@@ -73,7 +83,7 @@ public class AppController {
         // TODO: Delete points, not "repaint" with white color
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(20);
-//        currentTool = eraserTool;
+        currentTool = eraserTool;
     }
 
     @FXML
@@ -88,6 +98,26 @@ public class AppController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             gc.clearRect(0, 0, drawingCanvas.getWidth(), drawingCanvas.getHeight());
         }
+    }
+
+    @FXML
+    private void changeBgGrid() {
+        currentGrid = PageBackgroundType.GRID;
+        bgSettings(currentGrid);
+    }
+
+    @FXML
+    private void changeBgLines() {
+        currentGrid = PageBackgroundType.LINES;
+        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(currentGrid));
+        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(currentGrid));
+    }
+
+    @FXML
+    private void changeBgDots() {
+        currentGrid = PageBackgroundType.DOTS;
+        canvasContainer.widthProperty().addListener((obs, o, n) -> drawPage(currentGrid));
+        canvasContainer.heightProperty().addListener((obs, o, n) -> drawPage(currentGrid));
     }
 
     private void linesPage() {

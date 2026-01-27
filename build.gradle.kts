@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("com.rebrovdev.notesflash")
-    mainClass.set("com.rebrovdev.notesflash.App")
+    mainClass.set("com.rebrovdev.notesflash.app.App")
 }
 
 javafx {

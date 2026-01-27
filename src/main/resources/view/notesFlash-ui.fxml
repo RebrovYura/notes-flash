@@ -15,6 +15,10 @@
             <Button onAction="#selectPen" text="Ручка"/>
             <Button onAction="#selectEraser" text="Стерка"/>
             <Button onAction="#clearCanvas" text="Очистить"/>
+            <Button onAction="#changeBgGrid" text="Сетка"/>
+            <Button onAction="#changeBgLines" text="Линия"/>
+            <Button onAction="#changeBgDots" text="Точка"/>
+
         </VBox>
     </left>
 

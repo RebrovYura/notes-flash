@@ -1,8 +1,6 @@
-package com.rebrovdev.notesflash.tools;
+package com.rebrovdev.notesflash.model.tool;
 
-import javafx.scene.canvas.GraphicsContext;
-
-public class EraserTool implements Tool{
+public class EraserTool implements Tool {
     @Override
     public void onPress(double x, double y) {
 

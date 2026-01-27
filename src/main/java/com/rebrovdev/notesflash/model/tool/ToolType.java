@@ -1,4 +1,4 @@
-package com.rebrovdev.notesflash.tools;
+package com.rebrovdev.notesflash.model.tool;
 
 public enum ToolType {
     PEN,

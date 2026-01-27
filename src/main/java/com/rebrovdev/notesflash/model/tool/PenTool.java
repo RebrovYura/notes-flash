@@ -1,6 +1,6 @@
-package com.rebrovdev.notesflash.tools;
+package com.rebrovdev.notesflash.model.tool;
 
-import com.rebrovdev.notesflash.model.Point;
+import com.rebrovdev.notesflash.model.canvas.Point;
 import com.rebrovdev.notesflash.utils.Smoothing;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -1,6 +1,4 @@
-package com.rebrovdev.notesflash.tools;
-
-import javafx.scene.canvas.GraphicsContext;
+package com.rebrovdev.notesflash.model.tool;
 
 public interface Tool {
     void onPress(double x, double y);

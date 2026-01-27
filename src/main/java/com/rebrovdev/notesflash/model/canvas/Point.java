@@ -1,4 +1,4 @@
-package com.rebrovdev.notesflash.model;
+package com.rebrovdev.notesflash.model.canvas;
 
 public class Point {
     private final double x;

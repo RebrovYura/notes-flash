@@ -1,7 +1,5 @@
-package com.rebrovdev.notesflash;
+package com.rebrovdev.notesflash.app;
 
-import com.rebrovdev.notesflash.ui.CanvasView;
-import com.rebrovdev.notesflash.viewmodel.CanvasViewModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
