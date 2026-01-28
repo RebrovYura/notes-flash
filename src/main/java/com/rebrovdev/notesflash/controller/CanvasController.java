@@ -1,6 +1,6 @@
 package com.rebrovdev.notesflash.controller;
 
-import com.rebrovdev.notesflash.model.PageBackgroundType;
+import com.rebrovdev.notesflash.model.canvas.PageBackgroundType;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

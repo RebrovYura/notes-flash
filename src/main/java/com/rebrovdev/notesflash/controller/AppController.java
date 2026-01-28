@@ -1,8 +1,9 @@
 package com.rebrovdev.notesflash.controller;
 
-import com.rebrovdev.notesflash.model.PageBackgroundType;
+import com.rebrovdev.notesflash.model.canvas.CanvasRender;
+import com.rebrovdev.notesflash.model.canvas.CanvasState;
+import com.rebrovdev.notesflash.model.canvas.PageBackgroundType;
 import com.rebrovdev.notesflash.model.tool.EraserTool;
-import com.rebrovdev.notesflash.model.tool.PenTool;
 import com.rebrovdev.notesflash.model.tool.Tool;
 import com.rebrovdev.notesflash.model.tool.ToolFactory;
 import com.rebrovdev.notesflash.utils.Smoothing;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 import java.util.Optional;
 
 public class AppController {
+
     @FXML
     private StackPane canvasContainer;
 
@@ -27,14 +29,8 @@ public class AppController {
     private Canvas backgroundCanvas;
 
     private GraphicsContext gc;
-//    gc = drawingCanvas.getGraphicsContext2D();
-
-//    private final Tool penTool = new PenTool(gc, new Smoothing());
-    private final Tool eraserTool = new EraserTool();
-//    private final Tool penTool = ToolFactory.createPen(drawingCanvas);
-
+//    private final Tool eraserTool = new EraserTool();
     private Tool currentTool;
-
     private PageBackgroundType currentGrid = PageBackgroundType.LINES;
 
 
@@ -49,14 +45,17 @@ public class AppController {
     private void onMouseActions() {
         drawingCanvas.setOnMousePressed(e -> {
             currentTool.onPress(e.getX(), e.getY());
+//            CanvasRender.redraw(gc, new CanvasState(), new Smoothing());
         });
 
         drawingCanvas.setOnMouseDragged(e -> {
             currentTool.onDrag(e.getX(), e.getY());
+//            CanvasRender.redraw(gc, new CanvasState(), new Smoothing());
         });
 
         drawingCanvas.setOnMouseReleased(e -> {
             currentTool.onRelease(e.getX(), e.getY());
+//            CanvasRender.redraw(gc, new CanvasState(), new Smoothing());
         });
     }
 
@@ -83,7 +82,7 @@ public class AppController {
         // TODO: Delete points, not "repaint" with white color
         gc.setStroke(Color.WHITE);
         gc.setLineWidth(20);
-        currentTool = eraserTool;
+        currentTool = ToolFactory.createEraser(drawingCanvas);
     }
 
     @FXML
