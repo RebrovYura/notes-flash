@@ -29,15 +29,17 @@ public class AppController {
     private Canvas backgroundCanvas;
 
     private GraphicsContext gc;
+    private CanvasState canvasState;
 //    private final Tool eraserTool = new EraserTool();
     private Tool currentTool;
-    private PageBackgroundType currentGrid = PageBackgroundType.LINES;
+    private PageBackgroundType currentGrid = PageBackgroundType.GRID;
 
 
     @FXML
     public void initialize() {
+        canvasState = new CanvasState();
         gc = drawingCanvas.getGraphicsContext2D();
-        currentTool = ToolFactory.createPen(drawingCanvas);
+        currentTool = ToolFactory.createPen(drawingCanvas, canvasState);
         bgSettings(currentGrid);
         onMouseActions();
     }
@@ -50,6 +52,7 @@ public class AppController {
 
         drawingCanvas.setOnMouseDragged(e -> {
             currentTool.onDrag(e.getX(), e.getY());
+            CanvasRender.redraw(gc, canvasState);
 //            CanvasRender.redraw(gc, new CanvasState(), new Smoothing());
         });
 
@@ -74,15 +77,15 @@ public class AppController {
     private void selectPen() {
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(2);
-        currentTool = ToolFactory.createPen(drawingCanvas);
+        currentTool = ToolFactory.createPen(drawingCanvas, canvasState);
     }
 
     @FXML
     private void selectEraser() {
         // TODO: Delete points, not "repaint" with white color
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(20);
-        currentTool = ToolFactory.createEraser(drawingCanvas);
+//        gc.setStroke(Color.WHITE);
+//        gc.setLineWidth(20);
+        currentTool = ToolFactory.createEraser(drawingCanvas, canvasState);
     }
 
     @FXML

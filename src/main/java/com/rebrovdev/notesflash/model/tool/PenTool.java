@@ -26,7 +26,6 @@ public class PenTool implements Tool {
         this.gc = gc;
         this.state = state;
         this.smoothing = smoothing;
-
         setup();
     }
 
@@ -40,7 +39,7 @@ public class PenTool implements Tool {
 
     @Override
     public void onPress(double x, double y) {
-        currentStroke = new Stroke();
+        currentStroke = new Stroke(new Smoothing());
         currentStroke.addPoint(new Point(x, y));
         state.addStroke(currentStroke);
 //        CanvasRender.redraw(gc, state, smoothing);
@@ -49,7 +48,8 @@ public class PenTool implements Tool {
     @Override
     public void onDrag(double x, double y) {
         currentStroke.addPoint(new Point(x, y));
-        CanvasRender.redraw(gc, state, smoothing);
+        state.addStroke(currentStroke);
+        CanvasRender.redraw(gc, state);
 //        points.add(new Point(x, y));
 //        smoothing.redraw(gc, points);
     }

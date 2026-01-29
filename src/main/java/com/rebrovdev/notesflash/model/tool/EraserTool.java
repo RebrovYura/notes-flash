@@ -28,10 +28,6 @@ public class EraserTool implements Tool {
 
     @Override
     public void setup() {
-//        gc.setLineCap(StrokeLineCap.ROUND);
-//        gc.setLineJoin(StrokeLineJoin.ROUND);
-//        gc.setLineWidth(20);
-//        gc.setStroke(Color.WHITE);
     }
 
     @Override
@@ -48,8 +44,15 @@ public class EraserTool implements Tool {
                 stroke.getPoints().stream().anyMatch(p ->
                         distance(p, x, y) < radius
                 )
+
         );
-        System.out.println("this is onDrag from eraser ");
+        System.out.println(state.getStrokes().removeIf(stroke ->
+                stroke.getPoints().stream().anyMatch(p ->
+                        distance(p, x, y) < radius
+                )
+
+        ));
+//        System.out.println(state);
     }
 
     @Override
@@ -58,6 +61,7 @@ public class EraserTool implements Tool {
     }
 
     private double distance(Point p, double x, double y) {
+//        return Math.sqrt(Math.pow(p.getX() - x, 2) + Math.pow(p.getY() - y, 2));
         return Math.hypot(p.getX() - x, p.getY() - y);
     }
 }
