@@ -23,7 +23,7 @@ public class Stroke {
         return points;
     }
 
-    public void redraw(GraphicsContext gc, List<Point> points) {
+    public void redraw(GraphicsContext gc) {
         smoothing.redraw(gc, points);
     }
 }

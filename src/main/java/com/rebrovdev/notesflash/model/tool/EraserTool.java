@@ -17,7 +17,7 @@ public class EraserTool implements Tool {
     private final GraphicsContext gc;
     private Smoothing smoothing;
     private CanvasState state;
-    private final double radius = 20;
+    private final double radius = 15;
 
     public EraserTool(GraphicsContext gc, Smoothing smoothing, CanvasState state) {
         this.gc = gc;
@@ -38,21 +38,12 @@ public class EraserTool implements Tool {
 
     @Override
     public void onDrag(double x, double y) {
-//        points.add(new Point(x, y));
-//        smoothing.redraw(gc, points);
         state.getStrokes().removeIf(stroke ->
                 stroke.getPoints().stream().anyMatch(p ->
                         distance(p, x, y) < radius
                 )
 
         );
-        System.out.println(state.getStrokes().removeIf(stroke ->
-                stroke.getPoints().stream().anyMatch(p ->
-                        distance(p, x, y) < radius
-                )
-
-        ));
-//        System.out.println(state);
     }
 
     @Override

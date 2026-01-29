@@ -8,10 +8,10 @@ public class CanvasRender {
         double w = gc.getCanvas().getWidth();
         double h = gc.getCanvas().getHeight();
 
-//        gc.clearRect(0, 0, w, h);
+        gc.clearRect(0, 0, w, h);
 
         for (Stroke stroke: state.getStrokes()) {
-            stroke.redraw(gc, stroke.getPoints());
+            stroke.redraw(gc);
         }
         System.out.println("Hello from redraw");
     }

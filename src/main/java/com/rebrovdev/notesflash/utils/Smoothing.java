@@ -7,18 +7,25 @@ import java.util.List;
 public class Smoothing {
 
     public void redraw(GraphicsContext gc, List<Point> points) {
-        if (points.size() < 3) return;
 
-        Point p0 = points.get(points.size() - 3);
-        Point p1 = points.get(points.size() - 2);
-        Point p2 = points.get(points.size() - 1);
-
-        Point mid1 = midpoint(p0, p1);
-        Point mid2 = midpoint(p1, p2);
+        if (points.size() < 2) return;
 
         gc.beginPath();
-        gc.moveTo(mid1.getX(), mid1.getY());
-        gc.quadraticCurveTo(p1.getX(), p1.getY(), mid2.getX(), mid2.getY());
+        gc.moveTo(points.get(0).getX(), points.get(0).getY());
+
+        for (int i = 1; i < points.size() - 1; i++) {
+            Point p0 = points.get(i);
+            Point p1 = points.get(i + 1);
+
+            double cx = (p0.getX() + p1.getX()) / 2;
+            double cy = (p0.getY() + p1.getY()) / 2;
+
+            gc.quadraticCurveTo(
+                    p0.getX(), p0.getY(),
+                    cx, cy
+            );
+        }
+
         gc.stroke();
 
     }
