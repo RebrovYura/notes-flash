@@ -32,8 +32,6 @@ public class EraserTool implements Tool {
 
     @Override
     public void onPress(double x, double y) {
-//        points.clear();
-//        points.add(new Point(x, y));
     }
 
     @Override
@@ -48,11 +46,9 @@ public class EraserTool implements Tool {
 
     @Override
     public void onRelease(double x, double y) {
-//        points.clear();
     }
 
     private double distance(Point p, double x, double y) {
-//        return Math.sqrt(Math.pow(p.getX() - x, 2) + Math.pow(p.getY() - y, 2));
         return Math.hypot(p.getX() - x, p.getY() - y);
     }
 }

@@ -42,16 +42,11 @@ public class PenTool implements Tool {
         currentStroke = new Stroke(smoothing);
         currentStroke.addPoint(new Point(x, y));
         state.addStroke(currentStroke);
-//        CanvasRender.redraw(gc, state, smoothing);
     }
 
     @Override
     public void onDrag(double x, double y) {
         currentStroke.addPoint(new Point(x, y));
-//        state.addStroke(currentStroke);
-//        CanvasRender.redraw(gc, state);
-//        points.add(new Point(x, y));
-//        smoothing.redraw(gc, points);
     }
 
     @Override
